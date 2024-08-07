@@ -26,7 +26,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body class="bg-dark">
-
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">

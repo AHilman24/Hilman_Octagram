@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Jobs\ProcessSomething;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/',[UserController::class,'login']);
 Route::post('/auth',[UserController::class,'autentikasi']);
 Route::get('/logout',[UserController::class,'logout']);
 Route::middleware(['login'])->group(function(){
-    Route::get('/user',[UserController::class, 'user']);
+
     Route::get('/user',[UserController::class, 'show_user']);
     Route::post('/form-user',[UserController::class, 'create']);
     Route::get('/form-user',[UserController::class, 'add']);
@@ -30,10 +31,7 @@ Route::middleware(['login'])->group(function(){
     Route::post('/update/{id}',[UserController::class,'update']);
     Route::get('/destroy/{id}',[UserController::class,'delete']);
 
-
     Route::get('/index',[CategoryController::class,'index']);
-
-
 
     Route::get('/category',[CategoryController::class, 'category']);
     Route::get('/create',[CategoryController::class,'add']);

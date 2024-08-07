@@ -27,7 +27,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body class="bg-dark">
-
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
@@ -54,7 +53,6 @@
                             <label class="pull-right">
                                 <a href="/forget">Forgotten Password?</a>
                             </label>
-
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
                         <div class="social-login-content">

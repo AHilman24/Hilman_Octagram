@@ -63,6 +63,7 @@
     </style>
 </head>
 <body>
+    {{-- Template yang akan di pasang/digunakan --}}
     @include('template2.leftpanel')
 
     <div id="right-panel" class="right-panel">
@@ -293,7 +294,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
 
-
     <script src="assets/js/lib/data-table/datatables.min.js"></script>
     <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
@@ -309,6 +309,27 @@
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
       } );
+  </script>
+  <script>
+    (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
   </script>
 </body>
 </html>

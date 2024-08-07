@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Login
+class JWTAuth
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,11 @@ class Login
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            # code...
-            return $next($request);
+        if (!Auth::guard('api')->check()) {
+            return response()->json([
+                'status' => 'Unauthorized'
+            ], 401);
         }
-        return redirect('/');
+        return $next($request);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
     public function login(){
         return view('template.page-login');
     }
+
     public function autentikasi(Request $request){
         $validasi = $request->validate([
             'email' => ['email','required'],
@@ -29,34 +31,26 @@ class UserController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
-    public function user(){
-        return view('template.user-table');
-    }
-
-    public function add(){
-        return view('template.form-user');
-    }
     
-    public function create(Request $request)
-    {
+    public function show_user(){
+        $data['user'] = User::all();
+        return view('template.user-table',$data);
+    }
+
+    public function create(UserRequest $request){
         $validasi = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
+
         if ($validasi) {
             Session::flash('pesan','Data Berhasil Di Tambahkan');
         }else {
             Session::flash('pesan','Data Gagal Di Tambahkan');
         }
-        return redirect('/user');
-    }
 
-    public function show_user(){
-        $data['user'] = User::all();
-        $data['count'] = $data['user']->count();
-        return view('template.user-table',$data);
+        return redirect('/user');
     }
 
     public function edit(Request $request)
@@ -72,11 +66,13 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
+
         if ($user) {
             Session::flash('pesan','Data Berhasil Di Ubah');
         }else {
             Session::flash('pesan','Data Gagal Di Ubah');
         }
+
         return redirect('/user');
     }
     public function delete(Request $request)

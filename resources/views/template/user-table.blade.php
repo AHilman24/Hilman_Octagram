@@ -7,30 +7,30 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">User</li>
-                        </ol>
+                        <h1>User</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="content">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Data User</strong> 
                         <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                             Add Data
                         </button>
@@ -48,15 +48,24 @@
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Name</label>
-                                                <input type="text" name="name" class="form-control" id="recipient-name">
+                                                <input type="text" name="name" class="form-control" id="recipient-name" required>
+                                                @if ($errors->has('name'))
+                                                    <div>{{ $errors->first('name') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3">
                                                 <label for="email" class="col-form-label">Email</label>
-                                                <input type="email" name="email" class="form-control" id="email">
+                                                <input type="email" name="email" class="form-control" id="email" required>
+                                                @if ($errors->has('email'))
+                                                    <div>{{ $errors->first('email') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="col-form-label">Password</label>
-                                                <input type="password" name="password" class="form-control" id="password">
+                                                <input type="password" name="password" class="form-control" id="password" required>
+                                                @if ($errors->has('password'))
+                                                    <div>{{ $errors->first('password') }}</div>
+                                                @endif
                                             </div>
                                             <div class="mb-3">
                                                 <input type="submit" value="Add" class="btn btn-success">
@@ -105,15 +114,24 @@
                                                                 @csrf
                                                                 <div class="mb-3">
                                                                     <label for="recipient-name" class="col-form-label">Name</label>
-                                                                    <input type="text" name="name" class="form-control" value="{{ $item->name }}" id="recipient-name">
+                                                                    <input type="text" name="name" class="form-control" value="{{ $item->name }}" id="recipient-name" required>
+                                                                    @if ($errors->has('name'))
+                                                                        <div>{{ $errors->first('name') }}</div>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="email" class="col-form-label">Email</label>
-                                                                    <input type="email" name="email" class="form-control" value="{{ $item->email }}" id="email">
+                                                                    <input type="email" name="email" class="form-control" value="{{ $item->email }}" id="email" required>
+                                                                    @if ($errors->has('email'))
+                                                                        <div>{{ $errors->first('email') }}</div>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="password" class="col-form-label">Password</label>
-                                                                    <input type="password" name="password" class="form-control" id="password">
+                                                                    <input type="password" name="password" class="form-control" id="password" required>
+                                                                    @if ($errors->has('password'))
+                                                                        <div>{{ $errors->first('password') }}</div>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <input type="submit" value="Edit" class="btn btn-primary">
@@ -123,8 +141,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- @foreach ($edit as $key =>  $item)
-                                            @endforeache --}}
                                             <a href="/destroy/{{ $item->id }}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
@@ -134,7 +150,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
